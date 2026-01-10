@@ -5,6 +5,12 @@ import java.math.RoundingMode;
 
 public class Assign1 {
 
+    /**
+     * Computes the factorial of a given non-negative integer.
+     * @param value the non-negative integer to compute the factorial for
+     * @return the factorial of the given integer as a BigInteger
+     * @throws IllegalArgumentException if the input value is negative
+     */
     private static BigInteger factorial(int value) {
         if (value < 0) {
             throw new IllegalArgumentException("factorial value must be non-negative");
@@ -17,6 +23,12 @@ public class Assign1 {
         return total;
     }
 
+    /**
+     * Computes the nth Fibonacci number using recursion.
+     * @param value the index of the Fibonacci number to compute (0 <= value <= 40)
+     * @return the nth Fibonacci number
+     * @throws IllegalArgumentException if the input value is negative or greater than 40
+     */
     private static int fibonacci(int value) {
         if (value < 0 || value > 40) {
             throw new IllegalArgumentException("fibonacci value must be between 0 and 40");
@@ -27,7 +39,13 @@ public class Assign1 {
             return fibonacci(value - 1) + fibonacci(value - 2);
         }
     }
-
+    
+    /**
+     * Computes the mathematical constant e using a series expansion.
+     * @param value the number of terms to include in the series (value > 0)
+     * @return the computed value of e as a BigDecimal
+     * @throws IllegalArgumentException if the input value is less than 1
+     */
     private static BigDecimal eSeries(int value) {
         if (value < 1) {
             throw new IllegalArgumentException("e value must be greater than 0");
