@@ -1,34 +1,78 @@
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class Assign1 {
 
-    private BigInteger factorial(int n) {
-        if (n < 0) {
+    private BigInteger factorial(int value) {
+        if (value < 0) {
             throw new IllegalArgumentException("factorial value must be non-negative");
         }
         BigInteger total = BigInteger.valueOf(1);
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= value; i++) {
             total = total.multiply(BigInteger.valueOf(i));
         }
         return total;
     }
 
-    private int fibonacci(int n) {
-        if (n < 0 || n > 40) {
+    private int fibonacci(int value) {
+        if (value < 0 || value > 40) {
             throw new IllegalArgumentException("fibonacci value must be between 0 and 40");
         }
-        if (n == 0 || n == 1) {
+        if (value == 0 || value == 1) {
             return 1;
         }  else {
-            return fibonacci(n - 1) + fibonacci(n - 2);
+            return fibonacci(value - 1) + fibonacci(value - 2);
         }
     }
 
+    private BigDecimal eSeries(int value) {
+        if (value < 1) {
+            throw new IllegalArgumentException("e value must be greater than 0");
+        }
+        BigDecimal sum = BigDecimal.ONE;
+        BigDecimal term = BigDecimal.ONE;
+        int SCALE = 25;
+
+        for (int i = 1; i < value; i++) {
+            term = term.divide(BigDecimal.valueOf(i), SCALE, BigDecimal.ROUND_HALF_UP);
+            sum = sum.add(term);
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
-        for (int i = 0; i <= args.length; i++) {
-            System.out.println("Argument " + i + ": " + args[i]);
+        if (args.length == 0) {
+            System.out.println("-- Assign1 Info --");
+            System.out.println(" -fib [n] : Compute the nth Fibonacci number (0 <= n <= 40)");
+            System.out.println(" -fact [n] : Compute the factorial of n (n >= 0)");
+            System.out.println(" -e [n] : Compute the value of e using n iterations (n > 0)");
+            return;
+        } 
+
+        for (int i = 0; i < args.length; i++) {
+            if (i % 2 == 0) {
+                if (args[i].equals("-fib")) {
+                    int n = Integer.parseInt(args[i + 1]);
+                    Assign1 assign1 = new Assign1();
+                    int result = assign1.fibonacci(n);
+                    System.out.println("Fibonacci(" + n + ") = " + result);
+                } else if (args[i].equals("-fact")) {
+                    int n = Integer.parseInt(args[i + 1]);
+                    Assign1 assign1 = new Assign1();
+                    BigInteger result = assign1.factorial(n);
+                    System.out.println("Factorial(" + n + ") = " + result);
+                } else if (args[i].equals("-e")) {
+                    int n = Integer.parseInt(args[i + 1]);
+                    Assign1 assign1 = new Assign1();
+                    BigDecimal result = assign1.eSeries(n);
+                    System.out.println("e Series(" + n + ") = " + result);
+                } else {
+                    System.out.println("Unknown argument: " + args[i]);
+                }
+                System.out.println("Argument " + i + ": " + args[i]);
+            }
         }
     }
 }
