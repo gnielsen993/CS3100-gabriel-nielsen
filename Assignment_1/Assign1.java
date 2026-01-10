@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 
 public class Assign1 {
 
-    private BigInteger factorial(int value) {
+    private static BigInteger factorial(int value) {
         if (value < 0) {
             throw new IllegalArgumentException("factorial value must be non-negative");
         }
@@ -17,7 +17,7 @@ public class Assign1 {
         return total;
     }
 
-    private int fibonacci(int value) {
+    private static int fibonacci(int value) {
         if (value < 0 || value > 40) {
             throw new IllegalArgumentException("fibonacci value must be between 0 and 40");
         }
@@ -28,7 +28,7 @@ public class Assign1 {
         }
     }
 
-    private BigDecimal eSeries(int value) {
+    private static BigDecimal eSeries(int value) {
         if (value < 1) {
             throw new IllegalArgumentException("e value must be greater than 0");
         }
@@ -55,24 +55,46 @@ public class Assign1 {
         for (int i = 0; i < args.length; i++) {
             if (i % 2 == 0) {
                 if (args[i].equals("-fib")) {
-                    int n = Integer.parseInt(args[i + 1]);
-                    Assign1 assign1 = new Assign1();
-                    int result = assign1.fibonacci(n);
-                    System.out.println("Fibonacci(" + n + ") = " + result);
+                    try {
+                        int n = Integer.parseInt(args[i + 1]);
+                        int result = fibonacci(n);
+                        System.out.println("Fibonacci(" + n + ") = " + result);
+                    } catch (NumberFormatException e) {
+                        System.out.println("value must be an integer.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("missing value for -fib");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    
                 } else if (args[i].equals("-fact")) {
-                    int n = Integer.parseInt(args[i + 1]);
-                    Assign1 assign1 = new Assign1();
-                    BigInteger result = assign1.factorial(n);
-                    System.out.println("Factorial(" + n + ") = " + result);
+                    try {
+                        int n = Integer.parseInt(args[i + 1]);
+                        BigInteger result = factorial(n);
+                        System.out.println("Factorial(" + n + ") = " + result);
+                    } catch (NumberFormatException e) {
+                        System.out.println("value must be an integer.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("missing value for -fact");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+
                 } else if (args[i].equals("-e")) {
-                    int n = Integer.parseInt(args[i + 1]);
-                    Assign1 assign1 = new Assign1();
-                    BigDecimal result = assign1.eSeries(n);
-                    System.out.println("e Series(" + n + ") = " + result);
+                    try {
+                        int n = Integer.parseInt(args[i + 1]);
+                        BigDecimal result = eSeries(n);
+                        System.out.println("e Series(" + n + ") = " + result);
+                    } catch (NumberFormatException e) {
+                        System.out.println("value must be an integer.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("missing value for -e");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                 } else {
                     System.out.println("Unknown argument: " + args[i]);
                 }
-                System.out.println("Argument " + i + ": " + args[i]);
             }
         }
     }
