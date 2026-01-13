@@ -1,6 +1,7 @@
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 public class Assign1 {
 
@@ -57,7 +58,7 @@ public class Assign1 {
         int SCALE = 25;
 
         for (int i = 1; i < value; i++) {
-            term = term.divide(BigDecimal.valueOf(i), SCALE, BigDecimal.ROUND_HALF_UP);
+            term = term.divide(BigDecimal.valueOf(i), SCALE, RoundingMode.HALF_UP);
             sum = sum.add(term);
         }
         return sum;
