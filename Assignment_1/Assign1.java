@@ -82,7 +82,7 @@ public class Assign1 {
                             int result = fibonacci(n);
                             System.out.println("Fibonacci of " + n + " is " + result);
                         } catch (NumberFormatException e) {
-                            System.out.println("value must be an integer.");
+                            System.out.println("Fibonacci value must be an integer.");
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("missing value for -fib");
                         } catch (IllegalArgumentException e) {
@@ -95,7 +95,7 @@ public class Assign1 {
                             BigInteger result = factorial(n);
                             System.out.println("Factorial of " + n + " is " + result);
                         } catch (NumberFormatException e) {
-                            System.out.println("value must be an integer.");
+                            System.out.println("Factorial value must be an integer.");
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("missing value for -fac");
                         } catch (IllegalArgumentException e) {
@@ -108,7 +108,7 @@ public class Assign1 {
                             BigDecimal result = eSeries(n);
                             System.out.println("Value of e using " + n + " iterations is " + result);
                         } catch (NumberFormatException e) {
-                            System.out.println("value must be an integer.");
+                            System.out.println("e value must be an integer.");
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("missing value for -e");
                         } catch (IllegalArgumentException e) {
