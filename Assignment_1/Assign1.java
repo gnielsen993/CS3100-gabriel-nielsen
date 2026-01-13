@@ -75,46 +75,47 @@ public class Assign1 {
 
         for (int i = 0; i < args.length; i++) {
             if (i % 2 == 0) {
-                if (args[i].equals("-fib")) {
-                    try {
-                        int n = Integer.parseInt(args[i + 1]);
-                        int result = fibonacci(n);
-                        System.out.println("Fibonacci of " + n + " is " + result);
-                    } catch (NumberFormatException e) {
-                        System.out.println("value must be an integer.");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("missing value for -fib");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(e.getMessage());
+                switch (args[i]) {
+                    case "-fib" -> {
+                        try {
+                            int n = Integer.parseInt(args[i + 1]);
+                            int result = fibonacci(n);
+                            System.out.println("Fibonacci of " + n + " is " + result);
+                        } catch (NumberFormatException e) {
+                            System.out.println("value must be an integer.");
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("missing value for -fib");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
-                    
-                } else if (args[i].equals("-fac")) {
-                    try {
-                        int n = Integer.parseInt(args[i + 1]);
-                        BigInteger result = factorial(n);
-                        System.out.println("Factorial of " + n + " is " + result);
-                    } catch (NumberFormatException e) {
-                        System.out.println("value must be an integer.");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("missing value for -fac");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(e.getMessage());
+                    case "-fac" -> {
+                        try {
+                            int n = Integer.parseInt(args[i + 1]);
+                            BigInteger result = factorial(n);
+                            System.out.println("Factorial of " + n + " is " + result);
+                        } catch (NumberFormatException e) {
+                            System.out.println("value must be an integer.");
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("missing value for -fac");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
-
-                } else if (args[i].equals("-e")) {
-                    try {
-                        int n = Integer.parseInt(args[i + 1]);
-                        BigDecimal result = eSeries(n);
-                        System.out.println("Value of e using " + n + " iterations is " + result);
-                    } catch (NumberFormatException e) {
-                        System.out.println("value must be an integer.");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("missing value for -e");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(e.getMessage());
+                    case "-e" -> {
+                        try {
+                            int n = Integer.parseInt(args[i + 1]);
+                            BigDecimal result = eSeries(n);
+                            System.out.println("Value of e using " + n + " iterations is " + result);
+                        } catch (NumberFormatException e) {
+                            System.out.println("value must be an integer.");
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("missing value for -e");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
-                } else {
-                    System.out.println("Unknown argument: " + args[i]);
+                    default -> System.out.println("Unknown argument: " + args[i]);
                 }
             }
         }
