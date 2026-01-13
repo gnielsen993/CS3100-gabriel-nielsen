@@ -70,10 +70,10 @@ public class Assign1 {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.out.println("-- Assign 1 Help --");
-            System.out.println(" -fib [n] : Compute the nth Fibonacci number (0 <= n <= 40)");
-            System.out.println(" -fac [n] : Compute the factorial of n (n >= 0)");
-            System.out.println(" -e [n] : Compute the value of e using n iterations (n > 0)");
+            System.out.println("--- Assign 1 Help ---");
+            System.out.println(" -fib [n] : Compute the nth Fibonacci number [0, 40]");
+            System.out.println(" -fac [n] : Compute the factorial of n [0, " + Integer.MAX_VALUE + "]");
+            System.out.println(" -e [n] : Compute the value of e using n iterations [1, " + Integer.MAX_VALUE + "]");
             return;
         } 
 
