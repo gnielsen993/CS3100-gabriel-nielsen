@@ -57,7 +57,7 @@ public class Assign1 {
         int SCALE = 25;
 
         for (int i = 1; i < value; i++) {
-            term = term.divide(BigDecimal.valueOf(i));
+            term = term.divide(BigDecimal.valueOf(i), SCALE, BigDecimal.ROUND_HALF_UP);
             sum = sum.add(term);
         }
         return sum;
