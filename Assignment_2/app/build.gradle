@@ -3,8 +3,10 @@ plugins {
     id 'application'
 }
 
-sourceCompatibility = '24'
-targetCompatibility = '24'
+java {
+    sourceCompatibility = JavaVersion.VERSION_24
+    targetCompatibility = JavaVersion.VERSION_24
+}
 
 sourceSets {
     main {
