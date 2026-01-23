@@ -3,11 +3,8 @@ plugins {
     id 'application'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(24)
-    }
-}
+sourceCompatibility = '24'
+targetCompatibility = '24'
 
 sourceSets {
     main {
