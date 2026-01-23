@@ -1,6 +1,4 @@
 import java.util.Properties;
-import java.lang.Runtime;
-
 
 public class Assign2 {
     private static void cpuInfo() {
