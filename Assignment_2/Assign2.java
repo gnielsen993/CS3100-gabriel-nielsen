@@ -1,10 +1,22 @@
 import java.util.Properties;
 
+/**
+ * Assignment 2
+ * @author Gabriel Nielsen
+ */
 public class Assign2 {
+
+    /**
+     * Displays CPU information.
+     */
     private static void cpuInfo() {
         int cores = Runtime.getRuntime().availableProcessors();
         System.out.println("Number of CPU cores: " + cores);
     }
+
+    /**
+     * Displays memory information.
+     */
     private static void memoryInfo() {
         long totalMemory = Runtime.getRuntime().totalMemory();
         long freeMemory = Runtime.getRuntime().freeMemory();
@@ -15,6 +27,9 @@ public class Assign2 {
         System.out.println("Used Memory (bytes): " + usedMemory);
     }
 
+    /**
+     * Displays directory information.
+     */
     private static void directoryInfo() {
         String userDir = System.getProperty("user.dir");
         String userHome = System.getProperty("user.home");
@@ -24,6 +39,9 @@ public class Assign2 {
         
     }
 
+    /**
+     * Displays operating system information.
+     */
     private static void osInfo() {
         Properties props = System.getProperties();
         String osName = props.getProperty("os.name");
@@ -34,6 +52,9 @@ public class Assign2 {
  
     }
 
+    /**
+     * Displays Java runtime information.
+     */
     private static void javaInfo() {
         Properties props = System.getProperties();
         String javaVersion = props.getProperty("java.version");
@@ -48,6 +69,16 @@ public class Assign2 {
         System.out.println("Java VM Version: " + javaVmVersion);
         System.out.println("Java VM Name: " + javaVmName);
     }
+
+    /**
+     * Main method to process command-line arguments and display system information.
+     * @param args Command-line arguments, including:
+     *             - "-cpu" for CPU info
+     *             - "-mem" for memory info
+     *             - "-dirs" for directory info
+     *             - "-os" for operating system info
+     *             - "-java" for Java runtime info
+     */
     public static void main(String[] args) {
         for (String arg : args) {
             switch (arg) {
