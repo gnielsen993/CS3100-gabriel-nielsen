@@ -80,14 +80,25 @@ public class Assign2 {
      *             - "-java" for Java runtime info
      */
     public static void main(String[] args) {
-        for (String arg : args) {
-            switch (arg) {
-                case "-cpu" -> cpuInfo();
-                case "-mem" -> memoryInfo();
-                case "-dirs" -> directoryInfo();
-                case "-os" -> osInfo();
-                case "-java" -> javaInfo();
-                default -> {}
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-cpu":
+                    cpuInfo();
+                    break;
+                case "-mem":
+                    memoryInfo();
+                    break;
+                case "-dirs":
+                    directoryInfo();
+                    break;
+                case "-os":
+                    osInfo();
+                    break;
+                case "-java":
+                    javaInfo();
+                    break;
+                default:
+                    break;
             }
         }
     }
