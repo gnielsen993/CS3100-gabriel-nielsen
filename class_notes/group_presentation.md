@@ -5,9 +5,9 @@
 
 ## People
 
-- Nate Washburn A02444941
-- Nathan Haight A02447049
-- Zac Cunningham A02256025
+- Nate Washburn 
+- Nathan Haight 
+- Zac Cunningham 
 
 ## Objectives
 
