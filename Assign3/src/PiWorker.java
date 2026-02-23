@@ -11,6 +11,7 @@ public class PiWorker extends Thread {
         this.completedDigits = completedDigits;
     }
 
+    @Override
     public void run() {
         Bpp bpp = new Bpp();
 
