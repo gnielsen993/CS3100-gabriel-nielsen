@@ -36,6 +36,7 @@ public class Assign3 {
         long endTime = System.currentTimeMillis();
 
         HashMap<Integer, Integer> results = resultTable.getResults();
+        System.out.println();
         System.out.print("3.");
         for (int i = 1; i <= 1000; i++) {
             System.out.print(results.get(i));

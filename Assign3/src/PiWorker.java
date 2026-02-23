@@ -1,9 +1,9 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PiWorker extends Thread {
-    private TaskQueue taskQueue;
-    private ResultTable resultTable;
-    private AtomicInteger completedDigits;
+    private final TaskQueue taskQueue;
+    private final ResultTable resultTable;
+    private final AtomicInteger completedDigits;
 
     public PiWorker(TaskQueue taskQueue, ResultTable resultTable, AtomicInteger completedDigits) {
         this.taskQueue = taskQueue;
@@ -19,7 +19,11 @@ public class PiWorker extends Thread {
             if (digitPosition == null) {
                 break;
             }
-            int digitValue = bpp.getDecimal(digitPosition) / 100000000;
+            
+            int value = bpp.getDecimal(digitPosition);
+            String stringValue = Integer.toString(value);
+            int digitValue = Character.getNumericValue(stringValue.charAt(0));
+
             resultTable.addResult(digitPosition, digitValue);
 
             int completed = completedDigits.incrementAndGet();

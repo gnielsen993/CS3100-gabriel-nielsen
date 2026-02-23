@@ -103,17 +103,19 @@ public class Bpp {
 
 	private long powMod(long a, long b, long m) {
 		long tempo;
-		if (b == 0)
-			tempo = 1;
-		else if (b == 1)
-			tempo = a;
-
-		else {
-			long temp = powMod(a, b / 2, m);
-			if (b % 2 == 0)
-				tempo = (temp * temp) % m;
-			else
-				tempo = ((temp * temp) % m) * a % m;
+		switch ((int) Math.min(b, 2)) {
+			case 0:
+				tempo = 1;
+				break;
+			case 1:
+				tempo = a;
+				break;
+			default:
+				long temp = powMod(a, b / 2, m);
+				if (b % 2 == 0)
+					tempo = (temp * temp) % m;
+				else
+					tempo = ((temp * temp) % m) * a % m;
 		}
 		return tempo;
 	}
