@@ -40,10 +40,15 @@ T/F Async signal is always delivered to all threads, FALSE
 
 ## As an OS designer, which one would you prefer for thread cancellation: Asynchronous or deferred: Explain
 
+asynchronous will cancel immedietely once it gets the signal
 
+As an OS designer, with asynchronous multiprocessing, you would want asynchronous because you would want immediate termination
+
+In Symmetric multiprocessing, the OS is not assigned a particular core, the deferred is better
 
 ## why do we need TLS in a multithreading environment
 
+    TLS is thread local storage. In address space, some of the itesm will be shared between threads, but then each thread needs each own space for its own running processes. The unique parts of the address space is the TLS. We need TLS so that the threads can work independently of each other
 
 
 ## Explain "I/O bound applications typically need more LWPs than CPU-bound applications"
