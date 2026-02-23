@@ -1,4 +1,4 @@
-# CS3100 Study Guide — Lessons 9–10
+# CS3100 Study Guide — Lessons 9–11
 
 ---
 
@@ -87,10 +87,49 @@ In distributed systems, each computer is independent with its own RAM — no sha
 - **Synchronous signals:** Delivered to the specific thread that generated it.
 - **Asynchronous signals:** Delivered to all threads (initiated by external event) — **but not always.** An async signal is NOT always delivered to all threads.
 
+### Thread Cancellation: Asynchronous vs. Deferred
+- **Asynchronous cancellation:** Terminates the thread immediately once the signal is received.
+- **Deferred cancellation:** Thread checks for cancellation at safe points before terminating.
+- In **asymmetric multiprocessing** (OS assigned to a specific core), prefer asynchronous — you want immediate termination.
+- In **symmetric multiprocessing** (OS not assigned to a particular core), prefer deferred — safer, avoids corrupting shared data mid-operation.
+
+### TLS (Thread Local Storage)
+- In a multithreaded process, some data is shared between threads, but each thread also needs its own private storage for its own execution.
+- TLS is the unique portion of the address space belonging to each thread.
+- Needed so threads can work independently without interfering with each other's data.
+
 ### LWP (Lightweight Processes)
 - LWP tracks the current status of a kernel thread: 0 = locked/serving, 1 = unlocked/ready.
 - **I/O-bound applications need more LWPs than CPU-bound** — because I/O-bound threads frequently block, requiring more LWPs to keep user threads serviced.
 
 ---
 
-*Note: Lesson 11 notes were empty — add those and I can update this guide.*
+## Lesson 11: CPU Scheduling
+
+### CPU–I/O Burst Cycle
+- Typical pattern: CPU burst → I/O wait → CPU burst → I/O wait → ...
+- **I/O-intensive processes:** Many short CPU bursts.
+- **CPU-intensive processes:** Fewer but longer CPU bursts.
+
+### Preemptive vs. Nonpreemptive Scheduling
+- **Preemptive:** The OS forces a process to switch (involuntary).
+- **Nonpreemptive:** The process itself decides when to context switch (voluntary).
+- **Preemptive scheduling is NOT possible in multiprogramming** — only in multitasking.
+- **Both preemptive and nonpreemptive are possible in multitasking.**
+
+### Race Conditions in Preemptive Scheduling
+- A race condition occurs when the OS interrupts a thread in the middle of updating shared data, and another thread accesses that same data before the first thread finishes.
+- Prevention: Lock the resource — other processes cannot access it until the lock is released.
+
+### Dispatcher
+- The dispatcher handles the mechanics of a context switch: saves the current process state and loads the new process state.
+- **Dispatcher latency** = the time this save/load operation takes. It's pure overhead.
+
+### CPU Utilization vs. Throughput
+- Increased CPU utilization does **not** guarantee increased throughput.
+- In multiprogramming, the CPU may be active but only serving one process.
+- In multitasking, more processes can be served, increasing throughput.
+
+### Waiting Time vs. Turnaround Time
+- **Turnaround time = CPU execution + I/O wait + waiting time in ready queue.**
+- Waiting time is a direct component of turnaround time, so it can **never** be higher than turnaround time. Always ≤.
