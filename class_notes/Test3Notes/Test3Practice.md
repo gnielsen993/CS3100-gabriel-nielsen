@@ -74,7 +74,7 @@
 
 32. In the one-to-one model, there is usually a system-imposed limit on the number of threads an application can create.
 
-## Section E: fork/exec, Signals & LWP (Q33–40)
+## Section E: fork/exec, Signals & LWP (Q33–40) ⚠️ REVIEW — tricky section
 
 33. When `fork()` is called in a multithreaded process, the child process receives a copy of the parent's threads.
 
@@ -92,7 +92,7 @@
 
 40. An LWP status of 0 means the kernel thread is unlocked and ready to serve a user thread.
 
-## Section F: Thread Cancellation & TLS (Q41–46)
+## Section F: Thread Cancellation & TLS (Q41–46) ⚠️ REVIEW — tricky section
 
 41. Asynchronous thread cancellation waits for the thread to reach a safe checkpoint before terminating.
 
@@ -106,7 +106,7 @@
 
 46. Without TLS, threads in a multithreaded process would have no private storage for their own execution state.
 
-## Section G: CPU Scheduling — Lesson 11 (Q47–60)
+## Section G: CPU Scheduling — Lesson 11 (Q47–60) ⚠️ REVIEW — tricky section
 
 47. I/O-intensive processes have fewer but longer CPU bursts compared to CPU-intensive processes.
 

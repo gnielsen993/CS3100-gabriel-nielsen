@@ -76,7 +76,7 @@ In distributed systems, each computer is independent with its own RAM — no sha
 
 **Most modern OSes use One-to-One.**
 
-### fork() and exec() in Multithreaded Environments
+### ⚠️ REVIEW THIS — got tripped up on practice quiz: fork() and exec() in Multithreaded Environments
 - `fork()` creates a child process and passes threads to the new child.
 - `exec()` overrides the threads from the parent with a new program.
 - **There is no difference between single-threaded and multithreaded when `exec()` is called** — it replaces everything.
@@ -87,7 +87,7 @@ In distributed systems, each computer is independent with its own RAM — no sha
 - **Synchronous signals:** Delivered to the specific thread that generated it.
 - **Asynchronous signals:** Delivered to all threads (initiated by external event) — **but not always.** An async signal is NOT always delivered to all threads.
 
-### Thread Cancellation: Asynchronous vs. Deferred
+### ⚠️ REVIEW THIS — got tripped up on practice quiz: Thread Cancellation: Asynchronous vs. Deferred
 - **Asynchronous cancellation:** Terminates the thread immediately once the signal is received.
 - **Deferred cancellation:** Thread checks for cancellation at safe points before terminating.
 - In **asymmetric multiprocessing** (OS assigned to a specific core), prefer asynchronous — you want immediate termination.
@@ -111,7 +111,7 @@ In distributed systems, each computer is independent with its own RAM — no sha
 - **I/O-intensive processes:** Many short CPU bursts.
 - **CPU-intensive processes:** Fewer but longer CPU bursts.
 
-### Preemptive vs. Nonpreemptive Scheduling
+### ⚠️ REVIEW THIS — got tripped up on practice quiz: Preemptive vs. Nonpreemptive Scheduling
 - **Preemptive:** The OS forces a process to switch (involuntary).
 - **Nonpreemptive:** The process itself decides when to context switch (voluntary).
 - **Preemptive scheduling is NOT possible in multiprogramming** — only in multitasking.
