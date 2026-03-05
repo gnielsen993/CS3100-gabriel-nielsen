@@ -62,4 +62,43 @@ This prevents race conditions (`mutex`), overflow (`empty`), and underflow (`ful
 
 ## Explain the readers writers problem, including First and second problems
 
-## [on slide]
+Readers-Writers problem:
+Multiple processes/threads share a data object (file/database/structure).
+Readers only read, writers modify.
+Goals:
+1. Allow multiple readers at the same time (safe concurrency for reads).
+2. Writers need exclusive access (no readers/writers during write).
+3. Avoid starvation, depending on policy.
+
+### First Readers-Writers Problem (reader-priority)
+Requirement: no reader waits unless a writer is already writing.
+Effect: high read throughput, but writers can starve if readers keep arriving.
+
+Typical semaphore idea:
+- `rw_mutex = 1`: controls access to shared data (held by writer or by reader group).
+- `mutex = 1`: protects `read_count`.
+- `read_count = 0`.
+
+Reader:
+1. `wait(mutex)`; `read_count++`; if first reader (`read_count == 1`) then `wait(rw_mutex)`; `signal(mutex)`.
+2. read.
+3. `wait(mutex)`; `read_count--`; if last reader (`read_count == 0`) then `signal(rw_mutex)`; `signal(mutex)`.
+
+Writer:
+1. `wait(rw_mutex)`.
+2. write.
+3. `signal(rw_mutex)`.
+
+### Second Readers-Writers Problem (writer-priority)
+Requirement: once a writer is waiting, no new readers should start.
+Effect: prevents writer starvation, but readers can starve under heavy write load.
+
+Typical idea:
+- Add a "turnstile" / gate semaphore so arriving readers must wait behind waiting writers.
+- Existing readers can finish, then waiting writer proceeds.
+- While writers are queued, new readers are blocked from entering.
+
+Summary:
+- First problem prioritizes readers (writer starvation possible).
+- Second problem prioritizes writers (reader starvation possible).
+- Fair versions add FIFO ordering to avoid starvation for both sides.
