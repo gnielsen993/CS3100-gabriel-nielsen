@@ -60,4 +60,6 @@ Consumer:
 
 This prevents race conditions (`mutex`), overflow (`empty`), and underflow (`full`).
 
+## Explain the readers writers problem, including First and second problems
+
 ## [on slide]
