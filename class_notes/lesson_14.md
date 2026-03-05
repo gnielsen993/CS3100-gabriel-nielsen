@@ -44,6 +44,11 @@ This coordinates parallel threads and prevents buffer overflow/underflow.
 
 ## As an application developer, how would use semaphore to address synchronization issue in bounded buffer problem
 
+Bounded Buffer problem:
+Buffer is empty: consumer waits
+Buffer is full: producer wait for the consumer to remove items
+Only producer or consumer can access the shared buffer at the same time
+
 Use three semaphores:
 `mutex = 1` (binary semaphore for mutual exclusion), `empty = N` (counting semaphore for empty slots), and `full = 0` (counting semaphore for filled slots).
 
