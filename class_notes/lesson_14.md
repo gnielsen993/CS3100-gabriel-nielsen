@@ -39,9 +39,6 @@ Producer: `wait(empty)`, lock mutex, insert item, unlock mutex, `signal(full)`.
 Consumer: `wait(full)`, lock mutex, remove item, unlock mutex, `signal(empty)`.
 This coordinates parallel threads and prevents buffer overflow/underflow.
 
-## [on slide]
-
-
 ## As an application developer, how would use semaphore to address synchronization issue in bounded buffer problem
 
 Bounded Buffer problem:
@@ -102,3 +99,6 @@ Summary:
 - First problem prioritizes readers (writer starvation possible).
 - Second problem prioritizes writers (reader starvation possible).
 - Fair versions add FIFO ordering to avoid starvation for both sides.
+
+
+## Code Questions
