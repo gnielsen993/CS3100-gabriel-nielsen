@@ -24,23 +24,23 @@ public class SchedulerRR extends SchedulerBase implements Scheduler {
             timeCounter++;
 
             if (cpu.isBurstComplete()) {
-                logger.log("Process " + cpu.getName() + " burst complete");
                 contextSwitches++;
 
                 if (cpu.isExecutionComplete()) {
                     logger.log("Process " + cpu.getName() + " execution complete");
                 } else {
-                    readyQueue.add(cpu);  
+                    logger.log("Process " + cpu.getName() + " burst complete");
+                    readyQueue.add(cpu);
                 }
 
                 cpu = null;
-                timeCounter = 1;
+                timeCounter = 0;
             } else if (timeCounter >= timeQuantum) {
-                logger.log("Time quantum completed for process " + cpu.getName());
-                readyQueue.add(cpu);  
+                logger.log("Time quantum complete for process " + cpu.getName());
+                readyQueue.add(cpu);
                 cpu = null;
                 contextSwitches++;
-                timeCounter = 1;
+                timeCounter = 0;
             }
         }
 
