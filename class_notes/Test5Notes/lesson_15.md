@@ -59,4 +59,6 @@ False
 The largest/only hole might be connected to where the process is terminated
 
 ## How does paging solve external fragmentation issue without the need for compaction
+Paging breaks a process into fixed-size pages and maps each page to any free physical frame. Since pages do not need to be contiguous, scattered free frames can be used directly, so there are no gap-size failures like variable contiguous allocation.
 
+Result: external fragmentation is removed in main memory, though small internal fragmentation can still occur in the last page of a process.
