@@ -30,7 +30,7 @@ First fit is usually preferred because it balances external fragmentation and sp
 
 ## What is internal fragmentation in memory allocation?
 
-
+Difference between allocated memory and requested memory
 
 ## Explain: "Compaction offers a solution to external fragmentation, but only in a system that allows dynamic relocation
 
