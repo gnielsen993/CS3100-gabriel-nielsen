@@ -30,9 +30,14 @@ First fit is usually preferred because it balances external fragmentation and sp
 
 ## What is internal fragmentation in memory allocation?
 
-Difference between allocated memory and requested memory
+Internal fragmentation is wasted memory **inside** an allocated block. It occurs when the allocated block is larger than what the process actually uses, so part of that reservation stays unused forever.  
+Example: fixed-size allocation gives a process 8MB when it needs 6MB, so 2MB is internal waste.
+
+Difference from external fragmentation:  
+Internal fragmentation = space wasted inside allocated memory blocks.  
+External fragmentation = free memory is split into separated holes outside allocations.
 
 ## Explain: "Compaction offers a solution to external fragmentation, but only in a system that allows dynamic relocation
-
+Compaction is the process of moving allocated blocks at runtime and packing them together to make one or more large free regions. This reduces external fragmentation by removing small gaps. It only works when the OS can do **dynamic relocation** (relocating processes to different physical addresses), which requires hardware support like base/limit or MMU translation, and process state updates.
 
 ## T/F: External fragmentation is possible only in variable partitioning for contiguous memory allocation
