@@ -4,6 +4,11 @@
 
 In the Dining Philosopher problem, there are 5 people and only 5 chopsticks to eat with. If everyone reaches for the their left chopstick first, they are deadlocked, there is nothing preventing a race condition because they grabbed for separate items, so they are stuck waiting indefinitly. In a synchronization issue, it would occur reaching for the same resource, with a semaphor stopping the second person reaching for a chopstick
 
+### solutions
+
+- only allow four eaters at a time
+- only allow initial pickup if both available
+
 ## In variable partitioning for contiguous memory allocation, which one would you prefer to satisfy a memory request
 - First fit
 - best fit
