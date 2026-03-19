@@ -14,15 +14,19 @@ Plain answer: Semaphores give synchronization (mutual exclusion), but deadlock p
 - only allow initial pickup if both available
 
 ## In variable partitioning for contiguous memory allocation, which one would you prefer to satisfy a memory request
-- First fit
-- best fit
-- worst fit
+- First fit - First space with enough units
+- best fit - Space with least amount of leftover units in the hole
+- worst fit - Space with the most amount of leftover units in the hole
 
-In contiguous memory allocation, a program must be loaded into main memory. Variable partition is when memory usage for processes in variable depending on size needs. It is allocated exactly the amount of memory it needs
+I’d pick **first fit**.
+
+In contiguous memory allocation, each process must occupy one continuous block in RAM. Variable partitioning means free memory is split into blocks of different sizes, and a process gets one block that is large enough. The block is exactly the size the process needs
+
+First fit is a good default: it uses low search overhead because it chooses the first block that is large enough. Best fit can reduce leftover space a bit on each allocation (sometimes lower external fragmentation), but it needs a full search each time and can be slower. Worst fit usually leaves large holes and tends to increase external fragmentation.
 
 ### Explain your rationale in the context of external fragmentation and seasrch overhead
 
-
+First fit is usually preferred because it balances external fragmentation and speed: reasonably good allocation with much lower overhead than best fit, and generally better behavior than worst fit.
 
 ## What is internal fragmentation in memory allocation?
 
