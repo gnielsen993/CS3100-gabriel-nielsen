@@ -38,6 +38,25 @@ Internal fragmentation = space wasted inside allocated memory blocks.
 External fragmentation = free memory is split into separated holes outside allocations.
 
 ## Explain: "Compaction offers a solution to external fragmentation, but only in a system that allows dynamic relocation
-Compaction is the process of moving allocated blocks at runtime and packing them together to make one or more large free regions. This reduces external fragmentation by removing small gaps. It only works when the OS can do **dynamic relocation** (relocating processes to different physical addresses), which requires hardware support like base/limit or MMU translation, and process state updates.
+Compaction is the process of moving allocated blocks and packing them together so that small gaps are removed and larger free space is formed. It reduces external fragmentation by turning scattered holes into one bigger free block. It only works if the system supports **dynamic relocation** (processes can be moved to different physical addresses at runtime), which requires address-translation support and saved process state updates.
 
 ## T/F: External fragmentation is possible only in variable partitioning for contiguous memory allocation
+True.
+
+In **fixed partitioning**, the issue is mostly **internal** fragmentation.  
+In **variable partitioning (contiguous)**, external fragmentation is the main issue.
+
+## T/F Compaction gaurantees a new process to be allocated the requested memory space
+
+False
+
+Even if compacted, there still might not be enough total memory space, so a 4mb process cant fit in 2mb remaining
+
+## T/F for compaction, all the processes in memory need to be relocated every time a process terminates
+
+False
+
+The largest/only hole might be connected to where the process is terminated
+
+## How does paging solve external fragmentation issue without the need for compaction
+
