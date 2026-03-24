@@ -3,12 +3,18 @@
 
 ---
 
-## Slide 1: What Even *Is* an IoT Device?
+## Slide 1: What Is an IoT Device?
 
 ### Slide Content
-**Title:** The "Things" in IoT
+**Title:** What Is an IoT Device?
 
-**Bullet Points:**
+**Definition block (top of slide):**
+> **IoT — Internet of Things:** physical devices embedded with sensors, software, and network connectivity that collect and exchange data automatically, with little to no human interaction.
+
+**What they do (three-part flow):**
+`Sense → Compute → Communicate`
+
+**Examples:**
 - Soil sensors buried in fields
 - Smart thermostats, door locks, appliances
 - Industrial controllers on factory floors
@@ -20,51 +26,67 @@ A simple icon grid (3×2) showing 6 device types — each with a small icon and 
 Use a muted, dark background with small glowing icons to evoke an embedded/hardware feel.
 
 ### Script
-> "Before we talk about operating systems, let's agree on what we mean by IoT devices. We're not talking about laptops or phones. We're talking about soil sensors buried in a field for two years, a smart thermostat on your wall, an industrial valve controller in a factory, or a traffic monitor on a highway. These are tiny, often unattended, often battery-powered computers — and there are *billions* of them."
+> "Let's start with the basics — what even is an IoT device? IoT stands for Internet of Things. The idea is simple: take a physical object, embed it with sensors and software, connect it to a network, and let it collect and share data on its own — no human in the loop. Every IoT device does some version of three things: it senses something about the world, it does some minimal computation, and it communicates that data somewhere. That's the loop. And the 'things' doing this are everywhere — soil sensors buried in a field for two years, the thermostat on your wall, an industrial valve controller on a factory floor, a traffic monitor on a highway, a medical implant. These aren't laptops with a different case. They're a fundamentally different class of device — and there are *billions* of them deployed right now."
 
 ---
 
-## Slide 2: The Hardware Reality
+## Slide 2: Built to Run Alone
 
 ### Slide Content
-**Title:** Kilobytes, Not Gigabytes
+**Title:** Built to Run Alone
 
-**Two-column comparison table:**
+**Top section — The autonomy reality:**
+- Deployed once, unattended for months or years
+- No user. No IT admin. No power outlet.
+- Must self-sustain: sense, compute, communicate — indefinitely
 
-| Typical Laptop     | Typical IoT MCU       |
-|--------------------|-----------------------|
-| 16 GB RAM          | 64–256 **KB** RAM     |
-| 1 TB SSD           | 512 KB – 2 MB flash   |
-| 3 GHz, 8 cores     | 16–80 MHz, 1 core     |
-| Plugged into wall  | AA battery, 2+ years  |
-| You're sitting there | No one is there     |
+**Bottom section — What that demands (comparison table):**
+
+| Typical Laptop       | Typical IoT MCU        |
+|----------------------|------------------------|
+| 16 GB RAM            | 64–256 **KB** RAM      |
+| 1 TB SSD             | 512 KB – 2 MB flash    |
+| 3 GHz, 8 cores       | 16–80 MHz, 1 core      |
+| Plugged into wall    | AA battery, 2+ years   |
+| You're sitting there | No one is there        |
+
+**Callout box:**
+> "You *could* add more hardware — but more hardware means more power, more heat, more cost, and a device that can no longer run unattended for years. The constraints aren't a limitation. They're the design."
 
 **Visual:**
-A side-by-side scale diagram — on the left, a laptop chip icon labeled "Your laptop." On the right, a tiny MCU die icon labeled "IoT node." Use a dramatic size difference. Beneath the MCU, a small battery icon. Bold callout: **"1,000× less memory."**
+Split layout — left side shows a remote field with a small sensor node on a pole, battery icon beneath it, no connectivity bars. Right side shows the comparison table. A bold arrow connects the deployment image to the table with the label: *"This environment defines these numbers."*
 
 ### Script
-> "Here's the hardware reality. A typical IoT microcontroller has maybe 64 to 256 *kilobytes* of RAM. Your laptop has sixteen *gigabytes* — that's a difference of roughly a hundred thousand times. Storage is similarly tiny. And critically — these devices run on a single AA battery, sometimes for years. There's no power outlet. There's no keyboard. There's no user."
+> "Now here's what makes IoT devices genuinely different — they're built to run completely on their own. A soil sensor gets buried in a field. A controller gets installed in a pipeline. A monitor gets bolted to a bridge. And then nobody touches them for years. No user logging in, no IT admin pushing updates, no one nearby to reboot it when something goes wrong. That autonomy is the whole point — and it drives every hardware decision. These devices can't be plugged into a wall, so they run on a small battery, sometimes for two or three years straight. They can't waste cycles on idle background services. A typical IoT microcontroller has 64 to 256 kilobytes of RAM — your laptop has 16 gigabytes. Now, you might ask: why not just put more hardware in and make it bigger? You could. But more hardware means more power draw, which means a bigger battery, which means more cost, more heat, and a device that no longer survives unattended in a field for two years. The constraints aren't accidental. They exist because the deployment conditions demand them."
 
 ---
 
-## Slide 3: Why Not Just Use Linux?
+## Slide 3: The Right Tool for the Job
 
 ### Slide Content
-**Title:** Why Linux Doesn't Fit
+**Title:** The Right Tool for the Job
 
-v
+**Left column — "What a soil sensor needs to do:"**
+- Wake up every 30 minutes
+- Read one value from one sensor
+- Transmit it over a low-power radio
+- Go back to sleep
 
-**Right side — "IoT device has:"**
-- 64–256 KB RAM
-- Low-power wireless, intermittent connections
-- No display, no user, no IT department
-- Must run for *years* unattended
+**Right column — "What Linux brings:"**
+- Full POSIX filesystem & multi-user process management
+- Dynamic libraries and package manager
+- Network stack for every protocol
+- Dozens of background services running at boot
+- ~512 MB RAM minimum
+
+**Callout box:**
+> "IoT devices don't need general-purpose. They need specific-purpose — an OS built around exactly what the device actually does, and nothing else."
 
 **Visual:**
-A simple "square peg, round hole" diagram — a box labeled `Linux (~512 MB min)` trying to fit into a slot labeled `MCU (256 KB RAM)`. Use a red ✗ icon. Below it, a green ✓ icon next to a small box labeled `FreeRTOS / RIOT / Zephyr`.
+A two-column layout with a bold dividing line. Left column has a clean icon list (clock, sensor, radio wave, moon/sleep). Right column has the Linux feature list with most items faded out or greyed — visually suggesting that the device never uses them. A small label beneath: *"Most of this goes unused."*
 
 ### Script
-> "So why not just run Linux? Linux is great — but it's built for machines with megabytes of RAM at minimum, a rich filesystem, dynamic libraries, and a user who can intervene when things go wrong. An IoT node has *none* of that. Running Linux on a 64 KB MCU is like trying to run Photoshop on a digital wristwatch. The hardware assumptions are completely different. This is why a whole family of purpose-built IoT operating systems exists."
+> "So why not just run Linux? Here's the real issue — it's not only that Linux is too large. It's that most of what Linux does, an IoT device will never use. Think about what a soil sensor actually needs: wake up every thirty minutes, read one value from one sensor, send it over a low-power radio, go back to sleep. That's the entire job. Linux brings a full filesystem, multi-user process management, dynamic library loading, a network stack that supports every protocol imaginable, and dozens of background services — none of which that sensor will ever touch. Linux is a general-purpose OS. It's designed to run anything. But IoT devices don't need to run anything — they need to run one thing, reliably, for years, on a battery. A purpose-built IoT OS includes exactly the capabilities the device needs: a minimal scheduler, the right sensor drivers, one lightweight network protocol, and aggressive power management. Nothing more. That specificity is the point."
 
 ---
 
