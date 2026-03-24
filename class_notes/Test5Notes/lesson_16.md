@@ -2,8 +2,10 @@
 
 ## Explain the worst scenario of internal fragmentation in paging
 
+A process needs n pages + 1 byte, but since they are fixed sized, n + 1 frames would be allocated, wasting almost a full page of memory
 
 ## For a new process, how does OS provide a separation between programmers view of memory and actual physical memory in paging
+
 
 
 ## How can shared pagegs save memory space
