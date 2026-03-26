@@ -28,6 +28,9 @@ Use a muted, dark background with small glowing icons to evoke an embedded/hardw
 ### Script
 > "Let's start with the basics — what even is an IoT device? IoT stands for Internet of Things. The idea is simple: take a physical object, embed it with sensors and software, connect it to a network, and let it collect and share data on its own — no human in the loop. Every IoT device does some version of three things: it senses something about the world, it does some minimal computation, and it communicates that data somewhere. That's the loop. And the 'things' doing this are everywhere — soil sensors buried in a field for two years, the thermostat on your wall, an industrial valve controller on a factory floor, a traffic monitor on a highway, a medical implant. These aren't laptops with a different case. They're a fundamentally different class of device — and there are *billions* of them deployed right now."
 
+
+### ACTUAL SCRIPT
+" Our presentation is on IoT devices. IoT stands for Internet of Things. The idea is taking a physical object, embedding it with sensors and software, connect it to a network, and allow it to collect and distribute data on its own, without the need for human input. In most cases, an IoT will do three things: sense information, computate on the data given, and send that data out. There are billions of IoT devices doing this exact thing: home thermostats, soil sensors buried in fields, medical implants, traffic monitors, the list goes on?
 ---
 
 ## Slide 2: Built to Run Alone
@@ -59,6 +62,8 @@ Split layout — left side shows a remote field with a small sensor node on a po
 ### Script
 > "Now here's what makes IoT devices genuinely different — they're built to run completely on their own. A soil sensor gets buried in a field. A controller gets installed in a pipeline. A monitor gets bolted to a bridge. And then nobody touches them for years. No user logging in, no IT admin pushing updates, no one nearby to reboot it when something goes wrong. That autonomy is the whole point — and it drives every hardware decision. These devices can't be plugged into a wall, so they run on a small battery, sometimes for two or three years straight. They can't waste cycles on idle background services. A typical IoT microcontroller has 64 to 256 kilobytes of RAM — your laptop has 16 gigabytes. Now, you might ask: why not just put more hardware in and make it bigger? You could. But more hardware means more power draw, which means a bigger battery, which means more cost, more heat, and a device that no longer survives unattended in a field for two years. The constraints aren't accidental. They exist because the deployment conditions demand them."
 
+### ACTUAL SCRIPT
+" IoT devices are different from other computers because they are built to run on their own for a specific task. Take the soil sensor, you bury it in a field and leave it there for years, no one to push updates, no one nearby to reboot it. This is why their technical specs are so minimal. A typical IoT microcontroller has 64 to 256 kilobytes of RAM while a typical laptop might have 16 gigs. This all runs on a small battery expected to last years. If you shove more hardware or compute into it, it would either shorten its life span or require a bigger battery, no longer being the device that can last for years on its own"
 ---
 
 ## Slide 3: The Right Tool for the Job
