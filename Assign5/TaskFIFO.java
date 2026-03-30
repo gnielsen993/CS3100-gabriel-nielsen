@@ -12,24 +12,34 @@ public class TaskFIFO implements Runnable {
 
 	@Override
 	public void run() {
-        for (int i = 0; i < sequence.length; i++) {
-			int page = sequence[i];
-			boolean pageFault = true;
+		if (memorySize == 0) {
+			pageFaults[memorySize] = sequence.length;
+			return;
+		}
 
-			for (int j = 0; j < memorySize; j++) {
-				if (pageFaults[j] == page) {
-					pageFault = false;
+		int[] memory = new int[memorySize];
+		for (int i = 0; i < memorySize; i++) {
+			memory[i] = -1;
+		}
+		int faultCount = 0;
+		int replaceIndex = 0;
+
+		for (int page : sequence) {
+			boolean hit = false;
+			for (int loaded : memory) {
+				if (loaded == page) {
+					hit = true;
 					break;
 				}
 			}
 
-			if (pageFault) {
-				for (int j = 0; j < memorySize - 1; j++) {
-					pageFaults[j] = pageFaults[j + 1];
-				}
-				
-				pageFaults[memorySize - 1] = page;
+			if (!hit) {
+				faultCount++;
+				memory[replaceIndex] = page;
+				replaceIndex = (replaceIndex + 1) % memorySize;
 			}
 		}
+
+		pageFaults[memorySize] = faultCount;
 	}
 }
