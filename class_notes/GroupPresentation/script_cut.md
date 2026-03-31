@@ -1,0 +1,15 @@
+## 1
+
+" Our presentation is on IoT devices. IoT stands for Internet of Things. The idea is taking a physical object, embedding it with sensors and software, connect it to a network, and allow it to collect and distribute data on its own, without the need for human input. In most cases, an IoT will do three things: sense information, computate on the data given, and send that data out. Thats the core loop that defines these devices. There are billions of IoT devices doing this exact thing: industrial valve controllers, home thermostats, soil sensors buried in fields, medical implants, traffic monitors on the highway, the list goes on. These are fundamentally different machines than laptops
+
+## 2
+
+" IoT devices are different from other computers because they are built to run on their own for a specific task. Take the soil sensor, you bury it in a field and leave it there for years, no one to push updates, no one nearby to reboot it. Same thing goes for a sensor inside a patient, or a controller inside a pipeline, they aren't easily accessible but demand liability. This is why their technical specs are so minimal. A typical IoT microcontroller has 64 to 256 kilobytes of RAM while a typical laptop might have 16 gigs. This all runs on a small battery expected to last years. If you shove more hardware or compute into it, more power draw means a bigger battery, increasing cost, increasing heat, no longer being the device that can last for years on its own. These constraints are purposful because the deployment conditions demand them"
+
+## 3
+
+"Everything about IoT OS design flows from a set of core constraints. The First, Power, devices are battery operated, so it is made to aggresively sleep the radio and CPU, awaking only when needed. The second, Memory, they have kilobytes, not gigabytes, so kernels must be tiny and modular. Third, Connectivity, network stack must be purpose built to run on low-bandwidth wireless. Next, real-time response, a medical device can't be late, so precision timing gaurantees is vital. Another one is Heterogenity, thousands of different chip families requiring the same OS, so portability is critical. And the last one, longevity, these devices may sit in their location for years with no maintenance, so reliability is crucial. These constraints define IoT operating systems and why they are their own category"
+
+## 4
+
+"Why not run a traditional OS such as Linux? For One reason, it is just too large, it doesnt work on the IoT devices. But the main reason is it is just not needed. Most OSes have full filesystems, process management, library loading, background services, all of which dont service the needs of an IoT device. Take a soil sensor, it might need to wake up every thirty minutes, read one value from one sensor, send the information and sleep. Thats it. They only need to run one thing, not everything, creating liability for years. Their purpose-built OSes are made lightweight, using a minimal scheduler, sensor drivers, a network protocol, and aggresive power management to support just what it needs, nothing more."
