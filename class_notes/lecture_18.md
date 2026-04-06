@@ -16,15 +16,15 @@ Indirect buffer overflow attacks require overwriting pointers used in indirect c
 
 ## Compare & rationalize BOA prevention techniques that work through compiler modification
 
-- Compiler-based techniques add stack canaries, enforce non-executable stack (DEP), and insert bounds checks. These techniques make overflow exploits harder by turning out-of-bounds writes into detectable faults or rejected executions.
+- Compiler-based techniques add stack canaries, enforce non-executable stack (DEP), and insert bounds checks. These techniques make overflow exploits harder by turning out-of-bounds writes into detectable faults or rejected execution.
 
-- Stack guard
+- StackGuard: inserts a random canary value between local buffers and saved return address. On function return, it checks canary integrity to detect overwrite and aborts before hijack. This depends on the attacker not knowing the canary; if the canary is leaked or predictable, an overwrite can be crafted to preserve the value and bypass protection.
 
-- ProPolice
+- ProPolice: extends StackGuard with frame reordering and local variable placement so buffers are behind non-pointer locals, reducing the odds that overflow touches control data.
 
-- StackShield
+- StackShield: maintains a separate return-address table; writes to the stack copy are not trusted, restore on return, so corrupted return pointers aren’t followed.
 
-- Return Address defender
+- Return Address Defender: protects return addresses by encoding/xoring them with a secret or using a shadow stack, making direct return pointer overwrites safer by checking authenticity on return.
 
 ## How does program shepherding offer resilience against BOA
 
