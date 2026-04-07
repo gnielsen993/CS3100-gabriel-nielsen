@@ -33,3 +33,6 @@ Indirect buffer overflow attacks require overwriting pointers used in indirect c
 ## What are the advantages of hardware-level modification to protect against BOA? Explain in the context of SmashGuard scheme
 
 - Hardware-level protections provide strong enforcement with low overhead and make attacks harder to bypass in software. SmashGuard uses a protected shadow stack for return addresses and checks them on returns, so a buffer overflow cannot silently corrupt call/return state.
+
+
+## Assume that there are two compilers: Sec-Comp and Reg-Comp/ Sec-Comp has StackGuard buffer overflow prevention technique implemented in it. Reg-Comp does not have any buffer overflow prevention mechanism
