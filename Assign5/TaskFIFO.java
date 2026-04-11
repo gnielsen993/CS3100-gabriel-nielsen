@@ -1,26 +1,52 @@
+/**
+ * Simulates the FIFO page replacement algorithm
+ * 
+ * @author Gabriel Nielsen
+ */
 public class TaskFIFO implements Runnable {
+
+	private static final int EMPTY_FRAME = -1;
+
 	private final int[] sequence;
-	private final int memorySize;
+	private final int maxMemoryFrames;
+	private final int maxPageReference;
 	private final int[] pageFaults;
 
-	public TaskFIFO(int[] sequence, int memorySize, int[] pageFaults) {
+	/**
+	 * Constructs a FIFO simulation task.
+	 *
+	 * @param sequence          randomly generated sequence of page references
+	 * @param maxMemoryFrames   number of frames of memory available
+	 * @param maxPageReference  maximum page reference value possible in the sequence
+	 * @param pageFaults        output array; the resulting fault count is stored
+	 *                          at index {@code maxMemoryFrames}
+	 * @author Gabriel Nielsen
+	 */
+	public TaskFIFO(int[] sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
 		this.sequence = sequence;
-		this.memorySize = memorySize;
+		this.maxMemoryFrames = maxMemoryFrames;
+		this.maxPageReference = maxPageReference;
 		this.pageFaults = pageFaults;
-		
 	}
 
+	/**
+	 * Executes the FIFO page replacement simulation and writes the number of
+	 * page faults
+	 *
+	 * @author Gabriel Nielsen
+	 */
 	@Override
 	public void run() {
-		if (memorySize == 0) {
-			pageFaults[memorySize] = sequence.length;
+		if (maxMemoryFrames == 0) {
+			pageFaults[maxMemoryFrames] = sequence.length;
 			return;
 		}
 
-		int[] memory = new int[memorySize];
-		for (int i = 0; i < memorySize; i++) {
-			memory[i] = -1;
+		int[] memory = new int[maxMemoryFrames];
+		for (int i = 0; i < maxMemoryFrames; i++) {
+			memory[i] = EMPTY_FRAME;
 		}
+
 		int faultCount = 0;
 		int replaceIndex = 0;
 
@@ -36,10 +62,10 @@ public class TaskFIFO implements Runnable {
 			if (!hit) {
 				faultCount++;
 				memory[replaceIndex] = page;
-				replaceIndex = (replaceIndex + 1) % memorySize;
+				replaceIndex = (replaceIndex + 1) % maxMemoryFrames;
 			}
 		}
 
-		pageFaults[memorySize] = faultCount;
+		pageFaults[maxMemoryFrames] = faultCount;
 	}
 }
