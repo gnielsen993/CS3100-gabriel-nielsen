@@ -7,6 +7,7 @@ public class TaskMRU implements Runnable {
 
 	private static final int EMPTY_FRAME = -1;
 	private static final int EMPTY_TIMESTAMP = Integer.MAX_VALUE;
+	private static final int NOT_LOADED = -1;
 
 	private final int[] sequence;
 	private final int maxMemoryFrames;
@@ -44,36 +45,40 @@ public class TaskMRU implements Runnable {
 
 		int[] memory = new int[maxMemoryFrames];
 		int[] lastUsed = new int[maxMemoryFrames];
+		int[] frameOfPage = new int[maxPageReference + 1];
 		for (int i = 0; i < maxMemoryFrames; i++) {
 			memory[i] = EMPTY_FRAME;
 			lastUsed[i] = EMPTY_TIMESTAMP;
+		}
+		for (int i = 0; i <= maxPageReference; i++) {
+			frameOfPage[i] = NOT_LOADED;
 		}
 
 		int faultCount = 0;
 
 		for (int i = 0; i < sequence.length; i++) {
 			int page = sequence[i];
-			boolean hit = false;
+			int frame = frameOfPage[page];
 
-			for (int j = 0; j < maxMemoryFrames; j++) {
-				if (memory[j] == page) {
-					hit = true;
-					lastUsed[j] = i;
-					break;
-				}
+			if (frame != NOT_LOADED) {
+				lastUsed[frame] = i;
+				continue;
 			}
 
-			if (!hit) {
-				faultCount++;
-				int victimIndex = 0;
-				for (int j = 1; j < maxMemoryFrames; j++) {
-					if (lastUsed[j] > lastUsed[victimIndex]) {
-						victimIndex = j;
-					}
+			faultCount++;
+			int victimIndex = 0;
+			for (int j = 1; j < maxMemoryFrames; j++) {
+				if (lastUsed[j] > lastUsed[victimIndex]) {
+					victimIndex = j;
 				}
-				memory[victimIndex] = page;
-				lastUsed[victimIndex] = i;
 			}
+			int evicted = memory[victimIndex];
+			if (evicted != EMPTY_FRAME) {
+				frameOfPage[evicted] = NOT_LOADED;
+			}
+			memory[victimIndex] = page;
+			lastUsed[victimIndex] = i;
+			frameOfPage[page] = victimIndex;
 		}
 
 		pageFaults[maxMemoryFrames] = faultCount;

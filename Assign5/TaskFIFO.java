@@ -43,6 +43,7 @@ public class TaskFIFO implements Runnable {
 		}
 
 		int[] memory = new int[maxMemoryFrames];
+		boolean[] inMemory = new boolean[maxPageReference + 1];
 		for (int i = 0; i < maxMemoryFrames; i++) {
 			memory[i] = EMPTY_FRAME;
 		}
@@ -51,17 +52,14 @@ public class TaskFIFO implements Runnable {
 		int replaceIndex = 0;
 
 		for (int page : sequence) {
-			boolean hit = false;
-			for (int loaded : memory) {
-				if (loaded == page) {
-					hit = true;
-					break;
-				}
-			}
-
-			if (!hit) {
+			if (!inMemory[page]) {
 				faultCount++;
+				int evicted = memory[replaceIndex];
+				if (evicted != EMPTY_FRAME) {
+					inMemory[evicted] = false;
+				}
 				memory[replaceIndex] = page;
+				inMemory[page] = true;
 				replaceIndex = (replaceIndex + 1) % maxMemoryFrames;
 			}
 		}
